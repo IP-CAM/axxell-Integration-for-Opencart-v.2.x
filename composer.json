@@ -1,0 +1,27 @@
+{
+  "name": "xiwen/axxell-opencart-extension",
+  "description": "Integrate Axxell into Opencart",
+  "type": "opencart-extension",
+  "keywords": [
+    "recommendation",
+    "axxell",
+    "opencart",
+    "big-data",
+    "data-mining",
+    "artificial intelligence"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Xiwen Cheng",
+      "email": "x@cinaq.com"
+    }
+  ],
+  "config": {
+    "vendor-dir": "upload/vendor"
+  },
+  "require": {
+    "php": ">=5.2.0"
+  },
+  "minimum-stability": "dev"
+}

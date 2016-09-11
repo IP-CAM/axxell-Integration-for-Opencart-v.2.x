@@ -1,0 +1,19 @@
+version: '2'
+services:
+  opencart:
+    image: php:5.6-apache
+    ports:
+      - "8001:80"
+    links:
+      - mysql
+    volumes:
+      - ./scripts:/scripts
+      - ./html:/var/www/html
+
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=opencart
+    volumes:
+      - ./mysql-data:/var/lib/mysql
