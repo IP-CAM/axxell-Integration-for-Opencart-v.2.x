@@ -3,8 +3,11 @@
 set -xe
 a2enmod rewrite
 
+sed -i 's|debian jessie main$|debian jessie main contrib|' /etc/apt/sources.list || true
+
 apt-get update
 apt-get install -y libpng12-dev libjpeg-dev libmcrypt-dev
+apt-get dist-upgrade -y
 
 rm -rf /var/lib/apt/lists/*
 docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr
@@ -26,6 +29,7 @@ rm ${OPENCART_FILE}
 chown -R www-data:www-data .
 
 # setup ftp server for module uploads
+apt update
 apt install -y vsftpd libssh-dev
 docker-php-ext-install ftp
 
@@ -34,7 +38,6 @@ cat /etc/shadow.orig > /etc/shadow
 echo 'www-data:$6$MBUyqDrZ$2e9q7/86hAAc0CaN/4MuGq7ojX0PADsSPKpc09101ZDTao2R53VZ2e4rAhQefSP8LUHGKwLUIbydacJWrbvse0:16978:0:99999:7:::' >> /etc/shadow
 chsh www-data -s /bin/bash
 sed -i 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
-/etc/init.d/vsftpd start
-
 
 /etc/init.d/apache2 reload
+/etc/init.d/vsftpd start
